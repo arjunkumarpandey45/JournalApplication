@@ -12,7 +12,10 @@ target/
 .settings
 .springBeans
 .sts4-cache
-
+src/main/java/com/journalapp/journalApp/config/MongoConfig.java
+src/main/resources/.env
+../.vscode/
+.vscode/
 ### IntelliJ IDEA ###
 .idea
 *.iws
