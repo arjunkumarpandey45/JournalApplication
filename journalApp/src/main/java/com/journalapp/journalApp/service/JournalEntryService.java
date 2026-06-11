@@ -34,4 +34,8 @@ public class JournalEntryService {
 
 
     }
+
+    public JournalEntryEntity getById(ObjectId id) {
+      return   journalEntryRepo.findById(id).orElse(null);
+    }
 }
