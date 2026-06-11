@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class JournalEntryService {
     @Autowired
-    public JournalEntryRepo journalEntryRepo;
+    private JournalEntryRepo journalEntryRepo;
 
     public void saveEntry(JournalEntryEntity journalEntryEntity) {
         JournalEntryEntity saved = journalEntryRepo.save(journalEntryEntity);

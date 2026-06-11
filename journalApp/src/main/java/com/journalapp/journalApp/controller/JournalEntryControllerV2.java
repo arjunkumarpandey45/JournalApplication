@@ -16,7 +16,7 @@ import java.util.Optional;
 @RequestMapping("/journal")
 public class JournalEntryControllerV2 {
     @Autowired
-    public JournalEntryService journalEntryService;
+    private JournalEntryService journalEntryService;
 
     @GetMapping
 
