@@ -18,7 +18,7 @@ public class UserEntity {
     private ObjectId id;
     @Indexed(unique = true)
     @NonNull
-    public String userName;
+    private String userName;
     @NonNull
     private String password;
 
