@@ -51,8 +51,9 @@ public class JournalEntryControllerV2 {
 
         try {
             myEntry.setDate(LocalDateTime.now());
-            journalEntryService.saveEntry(myEntry, userName);
-            return new ResponseEntity<>(myEntry, HttpStatus.CREATED);
+           JournalEntryEntity saved= journalEntryService.saveEntry(myEntry, userName);
+         ;
+            return new ResponseEntity<>(saved, HttpStatus.CREATED);
 
 
         } catch (Exception e) {

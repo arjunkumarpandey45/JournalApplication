@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.journalapp.journalApp.entity.JournalEntryEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,12 +18,14 @@ public class JournalEntryService {
     private JournalEntryRepo journalEntryRepo;
     @Autowired
     private UserService userService;
-
-    public void saveEntry(JournalEntryEntity journalEntryEntity, String userName) {
+    @Transactional
+    public JournalEntryEntity saveEntry(JournalEntryEntity journalEntryEntity, String userName) {
         UserEntity user = userService.findByUserName(userName);
         JournalEntryEntity saved = journalEntryRepo.save(journalEntryEntity);
+
         user.getJournalEntryEntities().add(saved);
         userService.saveUser(user);
+        return saved;
     }
     public void saveEntry(JournalEntryEntity journalEntryEntity) {
 
