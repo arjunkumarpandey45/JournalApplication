@@ -5,6 +5,7 @@ import com.journalapp.journalApp.repository.JournalEntryRepo;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.journalapp.journalApp.entity.JournalEntryEntity;
@@ -18,6 +19,7 @@ public class JournalEntryService {
     private JournalEntryRepo journalEntryRepo;
     @Autowired
     private UserService userService;
+
     @Transactional
     public JournalEntryEntity saveEntry(JournalEntryEntity journalEntryEntity, String userName) {
         UserEntity user = userService.findByUserName(userName);
@@ -27,6 +29,7 @@ public class JournalEntryService {
         userService.saveUser(user);
         return saved;
     }
+
     public void saveEntry(JournalEntryEntity journalEntryEntity) {
 
         journalEntryRepo.save(journalEntryEntity);
@@ -36,11 +39,22 @@ public class JournalEntryService {
         return journalEntryRepo.findAll();
     }
 
-    public void deleteEntryById(ObjectId id, String userName) {
-        UserEntity user = userService.findByUserName(userName);
-        user.getJournalEntryEntities().removeIf(x -> x.getId().equals(id));
-        userService.saveUser(user);
-        journalEntryRepo.deleteById(id);
+    @Transactional
+    public boolean deleteEntryById(ObjectId id, String userName) {
+        boolean removed=false;
+        try {
+            UserEntity user = userService.findByUserName(userName);
+            removed = user.getJournalEntryEntities().removeIf(x -> x.getId().equals(id));
+            if (removed) {
+                userService.saveUser(user);
+                journalEntryRepo.deleteById(id);
+            }else{
+                ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Khel KHTAM",e);
+        }
+        return removed;
     }
 
     public JournalEntryEntity getUserById(ObjectId id) {
@@ -51,5 +65,9 @@ public class JournalEntryService {
 
     public JournalEntryEntity getById(ObjectId id) {
         return journalEntryRepo.findById(id).orElse(null);
+    }
+
+    public List<JournalEntryEntity> findByUserName(String userName) {
+        return userService.findByUserName(userName).getJournalEntryEntities();
     }
 }

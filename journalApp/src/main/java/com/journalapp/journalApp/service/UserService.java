@@ -8,9 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -20,17 +18,17 @@ public class UserService {
     private UserRepo userRepo;
 
 
-    public UserEntity saveUser(UserEntity userEntity) {
+    public UserEntity saveNewUser(UserEntity userEntity) {
         userEntity.setDate(LocalDateTime.now());
         userEntity.setRoles(List.of("user"));
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
            return userRepo.save(userEntity);
 
     }
-    public UserEntity savenewUser(UserEntity userEntity) {
+    public void saveUser(UserEntity userEntity) {
         userEntity.setDate(LocalDateTime.now());
 
-        return userRepo.save(userEntity);
+        userRepo.save(userEntity);
 
     }
     public List<UserEntity> getAllUser() {
