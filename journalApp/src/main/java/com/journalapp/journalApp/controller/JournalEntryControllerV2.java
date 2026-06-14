@@ -65,7 +65,7 @@ public class JournalEntryControllerV2 {
 
 
     @DeleteMapping("/id/{username}/{myId}")
-    public ResponseEntity<JournalEntryEntity> deleteById(
+    public ResponseEntity<Void> deleteById(
             @PathVariable String myId,@PathVariable String username) {
         try {
             journalEntryService.deleteEntryById(new ObjectId(myId),username);

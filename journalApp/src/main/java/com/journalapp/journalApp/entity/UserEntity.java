@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Document(collection = "user")
 @Data
@@ -23,6 +24,7 @@ public class UserEntity {
     private String password;
 
     private LocalDateTime date;
+    private List<String> roles;
     @DBRef
     private ArrayList<JournalEntryEntity> journalEntryEntities = new ArrayList<>();
 
