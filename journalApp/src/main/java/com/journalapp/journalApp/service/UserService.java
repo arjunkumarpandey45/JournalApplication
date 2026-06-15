@@ -20,7 +20,7 @@ public class UserService {
 
     public UserEntity saveNewUser(UserEntity userEntity) {
         userEntity.setDate(LocalDateTime.now());
-        userEntity.setRoles(List.of("user"));
+        userEntity.setRoles(List.of("USER"));
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
            return userRepo.save(userEntity);
 
@@ -44,5 +44,13 @@ public class UserService {
     }
     public UserEntity findByUserName(String userName){
         return userRepo.findByUserName(userName);
+    }
+
+    public UserEntity saveAdmin(UserEntity userEntity) {
+        userEntity.setDate(LocalDateTime.now());
+        userEntity.setRoles(List.of("USER","ADMIN"));
+        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+        return userRepo.save(userEntity);
+
     }
 }

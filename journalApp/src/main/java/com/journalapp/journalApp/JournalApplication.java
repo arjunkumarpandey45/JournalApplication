@@ -15,7 +15,8 @@ public class JournalApplication {
     public static void main(String[] args) {
         SpringApplication.run(JournalApplication.class, args);
     }
-@Bean
+
+    @Bean
     public PlatformTransactionManager transactionManager(MongoDatabaseFactory databaseFactory) {
         return new MongoTransactionManager(databaseFactory);
     }

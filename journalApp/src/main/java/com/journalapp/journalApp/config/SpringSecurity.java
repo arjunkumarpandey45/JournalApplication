@@ -30,7 +30,7 @@ public class SpringSecurity {
                         .requestMatchers("/public/**").permitAll()
                         .requestMatchers("/journal/**","/user/**")
                         .authenticated()
-                        .anyRequest()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")                     .anyRequest()
                         .permitAll()
                 )
                 .httpBasic(Customizer.withDefaults())

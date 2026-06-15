@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.*;
 public class userController {
     @Autowired
     private UserService userService;
-@Autowired
-private UserRepo userRepo;
+    @Autowired
+    private UserRepo userRepo;
 
     @PutMapping()
     public ResponseEntity<?> updateUser(@RequestBody UserEntity user) {
-    Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-        String userName=authentication.getName();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
         UserEntity userInDb = userService.findByUserName(userName);
 
         // User not found
@@ -39,9 +39,10 @@ private UserRepo userRepo;
         // Return updated user
         return ResponseEntity.ok(updatedUser);
     }
+
     @DeleteMapping()
     public ResponseEntity<?> deleteUser() {
-        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         userRepo.deleteUserByUserName(authentication.getName());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
