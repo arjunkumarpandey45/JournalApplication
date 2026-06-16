@@ -1,0 +1,11 @@
+
+
+spring:
+   data:
+    mongodb:
+      database: JournalApp
+      auto-index-creation: true
+
+server:
+  port: 8080
+
