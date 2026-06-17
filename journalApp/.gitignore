@@ -22,7 +22,6 @@ src/main/resources/.env
 .springBeans
 .sts4-cache
 
-src/main/resources/.env
 ../.vscode/
 .vscode/
 ### IntelliJ IDEA ###
@@ -42,4 +41,4 @@ build/
 !**/src/test/**/build/
 
 ### VS Code ###
-.vscode/
+
