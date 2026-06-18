@@ -52,6 +52,6 @@ private WeatherService weatherService;
     @GetMapping
     public ResponseEntity<?> greeting(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return new ResponseEntity<>("Hi "  +authentication.getName()+ " ,Weather feels like "+ weatherService.getWeather("London").getCurrent().getFeelslike(),HttpStatus.OK);
+        return new ResponseEntity<>("Hi "  +authentication.getName()+ " ,Weather feels like "+ weatherService.getWeather("Lucknow").getCurrent().getFeelslike(),HttpStatus.OK);
     }
 }

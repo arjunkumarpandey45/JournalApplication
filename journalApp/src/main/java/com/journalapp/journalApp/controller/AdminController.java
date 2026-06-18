@@ -1,5 +1,6 @@
 package com.journalapp.journalApp.controller;
 
+import com.journalapp.journalApp.Cache.AppCache;
 import com.journalapp.journalApp.entity.UserEntity;
 import com.journalapp.journalApp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,8 @@ import java.util.List;
 public class AdminController {
 @Autowired
 private UserService userService;
-
+@Autowired
+private AppCache appCache;
     @GetMapping("/all-users")
     public List<UserEntity> getAllUser(){
    try {
@@ -33,5 +35,12 @@ private UserService userService;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+    }
+    @GetMapping("/clear-cache")
+    public void clearCache(){
+appCache.init();
+        System.out.println("CACHE AFTER RELOAD");
+        System.out.println(appCache.APP_CACHE);
     }
 }
