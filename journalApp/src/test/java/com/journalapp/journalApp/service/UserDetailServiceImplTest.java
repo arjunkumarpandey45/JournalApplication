@@ -21,24 +21,25 @@ import static org.mockito.Mockito.when;
 
 public class UserDetailServiceImplTest {
 
-@InjectMocks
+    @InjectMocks
     private UserDetailServiceImpl userDetailService;
 
     @Mock
     private UserRepo userRepo;
-@BeforeEach
-void setup(){
-    MockitoAnnotations.openMocks(this);
-}
+
+    @BeforeEach
+    void setup() {
+        MockitoAnnotations.openMocks(this);
+    }
+
     @Test
     void loadByUserNameTest() {
 
-        UserEntity user =
-                new UserEntity(
-                        "ArjunPadey",
-                        "12353"
-                );
-
+        UserEntity user = UserEntity.builder()
+                .userName("ArjunPandey")
+                .password("12353")
+                .roles(List.of("USER"))
+                .build();
         user.setRoles(
                 List.of("USER"));
         when(userRepo.findByUserName(anyString()))
