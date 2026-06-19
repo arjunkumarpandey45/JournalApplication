@@ -1,11 +1,20 @@
-
-
 spring:
-   data:
+  data:
     mongodb:
       database: JournalApp
       auto-index-creation: true
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USER_EMAIL}
+    password: ${MAIL_USER_PASS}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
 server:
   port: 8080
-
