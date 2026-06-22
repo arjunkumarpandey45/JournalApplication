@@ -1,5 +1,6 @@
 package com.journalapp.journalApp.service;
 
+import com.journalapp.journalApp.Scheduler.UserScheduler;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,8 +9,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class EmailServiceTest {
     @Autowired
     private EmailService emailService;
+    @Autowired
+    private UserScheduler userScheduler;
     @Test
-    public  void sendMailTest(){
-        emailService.sendMail("arjun7236201798@gmail.com","From JournalApp","Hi,How are You ?");
+    public  void fetchUserAndSentAnalysisMailTest(){
+        userScheduler.fetchUserAndSentAnalysisMail();
     }
 }

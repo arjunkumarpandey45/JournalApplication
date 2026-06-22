@@ -41,11 +41,11 @@ public class MongoConfig {
                 boolean isPrimary = result.getBoolean("isWritablePrimary", false);
 
                 if (isPrimary) {
-                    System.out.println("PRIMARY CONNECTED: " + uri);
+
                     return client;
                 }
 
-                System.out.println("Secondary Found: " + uri);
+
 
                 // fallback save karlo agar primary na mile
                 if (fallbackClient == null) {
@@ -53,7 +53,7 @@ public class MongoConfig {
                 }
 
             } catch (Exception e) {
-                System.out.println("Failed Connection: " + uri);
+
             }
         }
 
