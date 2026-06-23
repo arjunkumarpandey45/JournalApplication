@@ -4,8 +4,10 @@ spring:
       database: JournalApp
       auto-index-creation: true
     redis:
-      host: localhost
-      port: 6379
+      host: hypermodern-turbolight-copper-85709.db.redis.io
+      port: 16745
+      username: default
+      password: ${REDIS_PASSWORD}
 
   mail:
     host: smtp.gmail.com

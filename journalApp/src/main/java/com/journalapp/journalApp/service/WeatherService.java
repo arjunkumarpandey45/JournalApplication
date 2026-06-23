@@ -25,7 +25,13 @@ public class WeatherService {
 
     public WeatherResponse getWeather(String city) {
         System.out.println(apiKey);
+
         WeatherResponse weatherResponse = redisService.get("weather_of_" + city, WeatherResponse.class);
+        System.out.println("CACHE = " + weatherResponse);
+        if(weatherResponse!= null){
+            System.out.println("CACHE HIT");
+            return weatherResponse;
+        }
         if(weatherResponse!=null){
             return weatherResponse;
         }else{
