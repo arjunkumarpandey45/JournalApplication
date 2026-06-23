@@ -3,6 +3,9 @@ spring:
     mongodb:
       database: JournalApp
       auto-index-creation: true
+    redis:
+      host: localhost
+      port: 6379
 
   mail:
     host: smtp.gmail.com

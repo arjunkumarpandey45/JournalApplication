@@ -4,6 +4,7 @@ import com.journalapp.journalApp.Cache.AppCache;
 import com.journalapp.journalApp.apiResponse.WeatherResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -19,12 +20,25 @@ public class WeatherService {
 
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private RedisService redisService;
 
     public WeatherResponse getWeather(String city) {
         System.out.println(apiKey);
-        String finalAPI = appCache.APP_CACHE.get("weather_api").replace("<apiKey>", apiKey).replace("<city>", city);
-        ResponseEntity<WeatherResponse> response = restTemplate.exchange(finalAPI, HttpMethod.GET, null, WeatherResponse.class);
-        WeatherResponse data = response.getBody();
-        return data;
+        WeatherResponse weatherResponse = redisService.get("weather_of_" + city, WeatherResponse.class);
+        if(weatherResponse!=null){
+            return weatherResponse;
+        }else{
+            String finalAPI = appCache.APP_CACHE.get("weather_api").replace("<apiKey>", apiKey).replace("<city>", city);
+            ResponseEntity<WeatherResponse> response = restTemplate.exchange(finalAPI, HttpMethod.GET, null, WeatherResponse.class);
+            WeatherResponse data = response.getBody();
+            if (data!=null){
+                redisService.set("weather_of_" + city,data, 300L);
+            }
+            return data;
+        }
+
+
     }
 }
+
